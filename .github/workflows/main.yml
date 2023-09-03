@@ -5,6 +5,8 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    env: 
+      backend-directory: ./backend
     steps:
       - uses: actions/checkout@v3
       
@@ -13,10 +15,10 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - run: cd backend
       - run: mvn clean compile package -Dmaven.test.skip=true
       - run: mkdir staging && cp target/classes/*.json stagging && cp target/*.jar staging
-
+      - working-directory: ${{env.backend-directory}}
+      
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v2
         with:
