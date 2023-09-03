@@ -8,8 +8,11 @@ jobs:
     env: 
       backend-directory: ./backend
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-java@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Create JAR
+        uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'temurin'
