@@ -16,9 +16,14 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - run: mvn clean compile package -Dmaven.test.skip=true
-      - run: mkdir staging && cp target/classes/*.json stagging && cp target/*.jar staging
-      - working-directory: ${{env.backend-directory}}
+
+      - name: Clean and compile without tests
+        run: mvn clean compile package -Dmaven.test.skip=true
+        working-directory: ${{env.backend-directory}}
+        
+      - name: Create folder stagging and move jar and jsons to it
+        run: mkdir staging && cp target/classes/*.json stagging && cp target/*.jar staging
+     
       
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v2
