@@ -33,7 +33,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
             name: java-jar-artifact
-            path: staging
+            path: $HOME/staging
         
 
   create-docker-image:
@@ -46,7 +46,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: java-jar-artifact
-          path: staging
+          path: $HOME/staging
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
