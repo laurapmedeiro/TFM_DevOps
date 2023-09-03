@@ -22,18 +22,18 @@ jobs:
         working-directory: ${{env.backend-directory}}
 
       - name: Create folder staging if not exists
-        run: mkdir -p staging
+        run: mkdir -p $HOME/staging
         working-directory: ${{env.backend-directory}}
         
       - name: Move JAR and JSON to staging folder
-        run: cp target/classes/*.json staging && cp target/*.jar staging
+        run: cp target/classes/*.json $HOME/staging && cp target/*.jar $HOME/staging
         working-directory: ${{env.backend-directory}}
      
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v2
         with:
             name: java-jar-artifact
-            path: ${{env.backend-directory}}/staging
+            path: staging
         
 
   create-docker-image:
@@ -46,7 +46,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: java-jar-artifact
-          path: ${{env.backend-directory}}/staging
+          path: staging
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -62,8 +62,6 @@ jobs:
 
       - name: Build docker image
         run: docker build . --file Dockerfile --tag laurapmedeiro/pwa-tfm:${{ github.sha }}
-        working-directory: ${{env.backend-directory}}
 
       - name: Push image
         run: docker push laurapmedeiro/pwa-tfm:${{ github.sha }}
-        working-directory: ${{env.backend-directory}}
