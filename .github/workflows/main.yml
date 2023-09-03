@@ -22,7 +22,7 @@ jobs:
         working-directory: ${{env.backend-directory}}
         
       - name: Create folder stagging and move jar and jsons to it
-        run: mkdir staging && cp target/classes/*.json stagging && cp target/*.jar staging
+        run: mkdir staging && cp target/classes/*.json staging && cp target/*.jar staging
         working-directory: ${{env.backend-directory}}
      
       - name: Upload JAR artifact
