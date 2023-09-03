@@ -1,0 +1,66 @@
+name: Java Spring Boot CI/CD
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env: 
+      backend-directory: ./backend
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Create JAR
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Clean and compile without tests
+        run: mvn clean compile package -Dmaven.test.skip=true
+        working-directory: ${{env.backend-directory}}
+
+      - name: Create folder staging if not exists
+        run: mkdir -p staging
+        
+      - name: Move JAR and JSON to staging folder
+        run: cp target/classes/*.json ../staging && cp target/*.jar ../staging
+        working-directory: ${{env.backend-directory}}
+     
+      - name: Upload JAR artifact
+        uses: actions/upload-artifact@v2
+        with:
+            name: java-jar-artifact
+            path: staging
+        
+
+  create-docker-image:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Download JAR artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: java-jar-artifact
+          path: staging
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build docker image
+        run: docker build . --file Dockerfile --tag laurapmedeiro/pwa-tfm:${{ github.sha }}
+
+      - name: Push image
+        run: docker push laurapmedeiro/pwa-tfm:${{ github.sha }}
