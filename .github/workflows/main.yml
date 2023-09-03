@@ -20,9 +20,13 @@ jobs:
       - name: Clean and compile without tests
         run: mvn clean compile package -Dmaven.test.skip=true
         working-directory: ${{env.backend-directory}}
+
+      - name: Create folder staging if not exists
+        run: mkdir -p staging
+        working-directory: ${{env.backend-directory}}
         
-      - name: Create folder stagging and move jar and jsons to it
-        run: mkdir staging && cp target/classes/*.json staging && cp target/*.jar staging
+      - name: Move JAR and JSON to staging folder
+        run: cp target/classes/*.json staging && cp target/*.jar staging
         working-directory: ${{env.backend-directory}}
      
       - name: Upload JAR artifact
