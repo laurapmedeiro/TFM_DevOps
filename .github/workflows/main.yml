@@ -60,7 +60,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build docker image
-        run: docker build . --file Dockerfile --tag laurapmedeiro/pwa-tfm:${{ github.sha }}
+        run: docker build . --file Dockerfile --tag laurapmedeiro/pwa-tfm:1.0.0
 
       - name: Push image
-        run: docker push laurapmedeiro/pwa-tfm:${{ github.sha }}
+        run: docker push laurapmedeiro/pwa-tfm:1.0.0
