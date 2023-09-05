@@ -39,9 +39,9 @@ import com.tfm.devops.backend.services.Encoder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin(origins = "*", allowCredentials = "true")
 public class AuthenticationController {
 
     @Autowired
