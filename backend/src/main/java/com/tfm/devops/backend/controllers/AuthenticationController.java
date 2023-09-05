@@ -41,7 +41,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:8100/", allowCredentials = "true")
 public class AuthenticationController {
 
     @Autowired
