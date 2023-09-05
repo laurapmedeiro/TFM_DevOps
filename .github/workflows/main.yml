@@ -7,6 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     env: 
       backend-directory: ./backend
+      
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -35,7 +36,10 @@ jobs:
             path: staging
         
 
-  create-docker-image:
+  create-docker-images:
+    env: 
+      tag-docker-front: frontend-1.0.0
+      tag-docker-back: backend-1.0.0
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -59,8 +63,14 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build docker image
-        run: docker build . --file Dockerfile --tag laurapmedeiro/pwa-tfm:1.0.0
+      - name: Build backend docker image
+        run: docker build . --file Dockerfile-backend --tag laurapmedeiro/pwa-tfm:${{env.tag-docker-back}}
+
+      - name: Push image
+        run: docker push laurapmedeiro/pwa-tfm:1.0.0
+      
+      - name: Build frontend docker image
+        run: docker build . --file Dockerfile-frontend --tag laurapmedeiro/pwa-tfm:${{env.tag-docker-front}}
 
       - name: Push image
         run: docker push laurapmedeiro/pwa-tfm:1.0.0
