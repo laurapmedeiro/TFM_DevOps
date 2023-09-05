@@ -19,7 +19,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Clean and compile without tests
-        run: mvn clean compile package -Dmaven.test.skip=true -
+        run: mvn clean compile package -Dmaven.test.skip=true
         working-directory: ${{env.backend-directory}}
 
       - name: Create folder staging if not exists
