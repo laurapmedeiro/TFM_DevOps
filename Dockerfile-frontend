@@ -5,7 +5,7 @@ FROM node:20.5-alpine
 WORKDIR /app
 
 # Copy package.json and package-lock.json files to working directory
-COPY ["./blue-green-pwa/package.json", "./blue-green-pwa/package-lock.json*", "./"]
+COPY ["blue-green-pwa/package.json", "blue-green-pwa/package-lock.json*", "./"]
 
 # Install IONIC and other dependencies
 RUN npm install -g @ionic/cli
