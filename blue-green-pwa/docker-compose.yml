@@ -1,0 +1,13 @@
+# docker-compose.yml
+version: '2'
+
+services:
+  web:
+    build:
+      # build from Dockerfile
+      context: ./
+      dockerfile: test.dockerfile
+    ports:
+      - "8100:8100"
+    volumes:
+      - .:/code

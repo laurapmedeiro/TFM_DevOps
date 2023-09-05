@@ -1,0 +1,8 @@
+{
+  "name": "BlueGreenPWA",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite",
+  "id": "00208245"
+}
