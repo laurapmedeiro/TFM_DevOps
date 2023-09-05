@@ -23,9 +23,13 @@ const Login: React.FC = () => {
       alert("Password cannot be empty")
     } else {
       axios.post(`http://localhost:8080/api/auth/signin`, {
-      username,
-      password
-      }).then((response: any) => {
+        username,
+        password
+      }, {headers: {
+         Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      }} ).then((response: any) => {
         console.log(response);
         if (response.data != null ){
           sessionStorage.setItem("username", username);
