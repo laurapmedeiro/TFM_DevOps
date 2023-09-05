@@ -22,11 +22,13 @@ const Login: React.FC = () => {
     if (password == null || username == ""){
       alert("Password cannot be empty")
     } else {
-      axios.post(`http://localhost:8080/api/auth/signin`, {
+      axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
+      axios.post(`http://localhost:8080/api/auth/login`, {
         username,
         password
       }, {headers: {
          Accept: 'application/json',
+         responseType: "json",
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*'
       }} ).then((response: any) => {
