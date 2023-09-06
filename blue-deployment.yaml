@@ -37,7 +37,7 @@ spec:
       port: 8100
       targetPort: 8100
   type: LoadBalancer  # Use NodePort or ClusterIP if necessary
-  LoadBalancerIP: "34.175.230.7"
+  loadBalancerIP: "34.175.230.7"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -78,6 +78,6 @@ spec:
       port: 8080
       targetPort: 8080
   type: LoadBalancer  # Use NodePort or ClusterIP if necessary
-  LoadBalancerIP: "34.175.230.7"
+  loadBalancerIP: "34.175.230.7"
 
 
