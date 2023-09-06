@@ -23,7 +23,7 @@ const Login: React.FC = () => {
       alert("Password cannot be empty")
     } else {
       axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
-      axios.post(`http://backend-service:8080/api/auth/login`, {
+      axios.post(`http://34.175.230.7:8080/api/auth/login`, {
         username,
         password
       }, {headers: {
