@@ -38,8 +38,8 @@ jobs:
 
   create-docker-images:
     env: 
-      tag-docker-front: frontend-2.0.0
-      tag-docker-back: backend-2.0.0
+      tag-docker-front: frontend-1.0.0
+      tag-docker-back: backend-1.0.0
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -75,5 +75,31 @@ jobs:
       - name: Push image
         run: docker push laurapmedeiro/pwa-tfm:${{env.tag-docker-front}}
 
+  deploy-K8s:
+    env:
+      GKE_CLUSTER_NAME: deployment-cluster    # cluster name
+      GKE_ZONE: europe-southwest1   # cluster zone
+      
+    needs: create-docker-images
+    runs-on: ubuntu-latest
 
+    steps:
+      # Setup in gcloud CLI
+      - name: Auth to Google
+        uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.GKE_SA_KEY }}'
+
+      # Get the GKE credentialsr
+      - name: Set up GKE credentials
+        uses: google-github-actions/get-gke-credentials@v0
+        with:
+          cluster_name: ${{ env.GKE_CLUSTER_NAME}}
+          location: ${{ env.GKE_ZONE }}
+
+      # Deploy the YAML file to the GKE cluster
+      - name: Deploy
+        run: |-
+          kubectl apply -f blue-deployment.yaml
+          kubectl get all
     
