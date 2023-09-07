@@ -78,6 +78,7 @@ jobs:
         run: docker push laurapmedeiro/pwa-tfm:${{env.tag-docker-front}}
 
   deploy-K8s:
+    if: true
     env:
       GKE_CLUSTER_NAME: deployment-cluster    # cluster name
       GKE_ZONE: europe-southwest1   # cluster zone
