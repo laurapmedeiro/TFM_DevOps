@@ -100,15 +100,9 @@ jobs:
           cluster_name: ${{ env.GKE_CLUSTER_NAME}}
           location: ${{ env.GKE_ZONE }}
 
-      - name: LS 1
-        run: ls ../..
-
-      - name: LS 
-        run: ls ..
-
       # Deploy the YAML file to the GKE cluster
       - name: Deploy
         run: |-
-          kubectl apply -f ../../blue-deployment.yaml
+          kubectl apply -f TFM_DevOps/blue-deployment.yaml
           kubectl get all
     
