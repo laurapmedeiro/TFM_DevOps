@@ -83,7 +83,7 @@ jobs:
       GKE_CLUSTER_NAME: deployment-cluster    # cluster name
       GKE_ZONE: europe-southwest1   # cluster zone
       
-    needs: create-docker-images
+    #needs: create-docker-images
     runs-on: ubuntu-latest
 
     steps:
