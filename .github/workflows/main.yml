@@ -97,6 +97,13 @@ jobs:
           cluster_name: ${{ env.GKE_CLUSTER_NAME}}
           location: ${{ env.GKE_ZONE }}
 
+       # Update the yaml
+      - name: Get the files
+        run: |-
+          git clone https://github.com/laurapmedeiro/TFM_DevOps.git
+          git fetch
+          git pull
+
       # Deploy the YAML file to the GKE cluster
       - name: Deploy
         run: |-
