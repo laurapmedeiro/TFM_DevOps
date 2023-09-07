@@ -103,8 +103,7 @@ jobs:
       # Deploy the YAML file to the GKE cluster
       - name: Deploy
         run: |-
-          pwd
-          ls
+          echo | ls
           kubectl apply -f ../blue-deployment.yaml
           kubectl get all
     
