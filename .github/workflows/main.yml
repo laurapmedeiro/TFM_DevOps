@@ -87,6 +87,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
+
       # Setup in gcloud CLI
       - name: Auth to Google
         uses: 'google-github-actions/auth@v0'
@@ -103,6 +105,6 @@ jobs:
       # Deploy the YAML file to the GKE cluster
       - name: Deploy
         run: |-
-          kubectl apply -f TFM_DevOps/blue-deployment.yaml
+          kubectl apply -f blue-deployment.yaml
           kubectl get all
     
