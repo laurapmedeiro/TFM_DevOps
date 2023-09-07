@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
   build:
+    if: false
     runs-on: ubuntu-latest
     env: 
       backend-directory: ./backend
@@ -37,6 +38,7 @@ jobs:
         
 
   create-docker-images:
+    if: false
     env: 
       tag-docker-front: frontend-1.0.0
       tag-docker-back: backend-1.0.0
@@ -97,16 +99,11 @@ jobs:
           cluster_name: ${{ env.GKE_CLUSTER_NAME}}
           location: ${{ env.GKE_ZONE }}
 
-       # Update the yaml
-      - name: Get the files
-        run: |-
-          git clone https://github.com/laurapmedeiro/TFM_DevOps.git
-          git fetch
-          git pull
-
       # Deploy the YAML file to the GKE cluster
       - name: Deploy
         run: |-
-          kubectl apply -f blue-deployment.yaml
+          pwd
+          ls
+          kubectl apply -f ../blue-deployment.yaml
           kubectl get all
     
