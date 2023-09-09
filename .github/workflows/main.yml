@@ -4,7 +4,6 @@ on: [push]
 
 jobs:
   build:
-    if: false
     runs-on: ubuntu-latest
     env: 
       backend-directory: ./backend
@@ -38,7 +37,6 @@ jobs:
         
 
   create-docker-images:
-    if: false
     env: 
       tag-docker-front: frontend-1.0.0
       tag-docker-back: backend-1.0.0
@@ -83,7 +81,7 @@ jobs:
       GKE_CLUSTER_NAME: deployment-cluster    # cluster name
       GKE_ZONE: europe-southwest1   # cluster zone
       
-    #needs: create-docker-images
+    needs: create-docker-images
     runs-on: ubuntu-latest
 
     steps:
