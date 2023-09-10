@@ -6,10 +6,10 @@ WORKDIR /app
 # Copy the certificate to connect to database
 COPY staging/master-reactor-395418-866dd15b8e73.json src/main/resources/master-reactor-395418-866dd15b8e73.json 
 
-#Copy the generated jar
+# Copy the generated jar
 COPY  staging/backend-0.0.1-SNAPSHOT.jar backend.jar
 
-#Execute the jar
+# Execute the jar
 ENTRYPOINT ["java", "-jar", "backend.jar"]
 
 # Make the app available on port 8080
