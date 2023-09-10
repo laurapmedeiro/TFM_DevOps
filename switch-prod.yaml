@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service-dev
+spec:
+  selector:
+      app: frontend
+      version: ${VERSION_DEV}
+  ports: 
+    - port: 7100
+      targetPort: 8100
+      protocol: TCP
+  type: LoadBalancer
+  loadBalancerIP: "${SERVER_IP}"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service-prod
+spec:
+  selector:
+      app: frontend
+      version: ${VERSION_PROD}
+  ports: 
+    - port: 7200
+      targetPort: 8100
+      protocol: TCP
+  type: LoadBalancer
+  loadBalancerIP: "${SERVER_IP}"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service-dev
+spec:
+  selector:
+    app: backend
+    version: ${VERSION_DEV}
+  ports: 
+    - port: 7101
+      targetPort: 8080
+      protocol: TCP
+  type: LoadBalancer
+  loadBalancerIP: "${SERVER_IP}"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service-prod
+spec:
+  selector:
+    app: backend
+    version: ${VERSION_PROD}
+  ports: 
+    - port: 7201
+      targetPort: 8080
+      protocol: TCP
+  type: LoadBalancer
+  loadBalancerIP: "${SERVER_IP}"
+
+

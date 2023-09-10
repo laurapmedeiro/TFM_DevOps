@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend-deployment-blue
+  name: frontend-deployment-green
   labels:
     app: frontend
-    version: blue
+    version: green
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: frontend
-      version: blue
+      version: green
   template:
     metadata:
       labels:
         app: frontend
-        version: blue
+        version: green
     spec:
       containers:
         - name: frontend-container
-          image: laurapmedeiro/pwa-tfm:frontend-1.0.0
+          image: laurapmedeiro/pwa-tfm:frontend-2.0.0
           ports:
             - containerPort: 8100
           imagePullPolicy: Always
@@ -28,25 +28,25 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-deployment-blue
+  name: backend-deployment-green
   labels:
     app: backend
-    version: blue
+    version: green
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: backend
-      version: blue
+      version: green
   template:
     metadata:
       labels:
         app: backend
-        version: blue
+        version: green
     spec:
       containers:
         - name: backend-container
-          image: laurapmedeiro/pwa-tfm:backend-1.0.0
+          image: laurapmedeiro/pwa-tfm:backend-2.0.0
           ports:
             - containerPort: 8080
           imagePullPolicy: Always
