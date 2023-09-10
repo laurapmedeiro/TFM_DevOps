@@ -107,6 +107,6 @@ jobs:
       # Deploy the YAML file to the GKE cluster
       - name: Deploy
         run: |-
-          kubectl apply -f blue-deployment.yaml
+          kubectl apply -f ${{ secrets.VERSION_DEPLOY }}-deployment.yaml
           kubectl get all
     
