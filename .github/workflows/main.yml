@@ -1,6 +1,12 @@
 name: Java Spring Boot CI/CD
 
-on: [push]
+on: 
+  push:
+    branches:
+      - develop
+  pull_request:
+    types:
+      - closed
 
 jobs:
   build:
