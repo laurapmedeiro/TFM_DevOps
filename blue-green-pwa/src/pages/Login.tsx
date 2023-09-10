@@ -21,9 +21,13 @@ const Login: React.FC = () => {
     }
     if (password == null || username == ""){
       alert("Password cannot be empty")
-    } else {
+    } else {      
       axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
-      axios.post(`http://34.175.230.7:8080/api/auth/login`, {
+      // const apiUrl = process.env.REACT_APP_API_URL;
+      let url = import.meta.env.VITE_APP_API_URL;
+      console.log("import: " + url);
+     
+      axios.post(url + `/api/auth/login`, {
         username,
         password
       }, {headers: {
