@@ -9,8 +9,8 @@ COPY ["blue-green-pwa/package.json", "blue-green-pwa/package-lock.json*", "./"]
 
 # Install IONIC and other dependencies
 RUN npm install -g @ionic/cli
-# RUN npm install react-scripts
 
+# Install dependencies
 RUN npm install
 
 # Add the apllication
@@ -19,5 +19,5 @@ COPY ./blue-green-pwa /app/
 # Start the application
 ENTRYPOINT ["ionic", "serve", "--external", "--consolelogs"]
 
-# Open port
+# Make the application available on  port
 EXPOSE 8100
