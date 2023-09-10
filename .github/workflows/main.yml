@@ -6,10 +6,11 @@ on:
       - develop
   pull_request:
     types:
-      - closed
+      - accepted
 
 jobs:
   build:
+    if: github.event.pull_request.merged == true || github.event_name == 'push'
     runs-on: ubuntu-latest
     env: 
       backend-directory: ./backend
