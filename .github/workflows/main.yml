@@ -42,8 +42,8 @@ jobs:
 
   create-docker-images:
     env: 
-      tag-docker-front: frontend-1.0.0
-      tag-docker-back: backend-1.0.0
+      tag-docker-front: frontend-3.0.0
+      tag-docker-back: backend-3.0.0
     needs: build
     runs-on: ubuntu-latest
     steps:

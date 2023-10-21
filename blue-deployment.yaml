@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: frontend-container
-          image: laurapmedeiro/pwa-tfm:frontend-1.0.0
+          image: laurapmedeiro/pwa-tfm:frontend-3.0.0
           ports:
             - containerPort: 8100
           imagePullPolicy: Always
@@ -46,7 +46,7 @@ spec:
     spec:
       containers:
         - name: backend-container
-          image: laurapmedeiro/pwa-tfm:backend-1.0.0
+          image: laurapmedeiro/pwa-tfm:backend-3.0.0
           ports:
             - containerPort: 8080
           imagePullPolicy: Always
